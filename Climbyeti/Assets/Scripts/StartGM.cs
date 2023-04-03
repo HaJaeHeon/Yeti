@@ -51,6 +51,11 @@ public class StartGM : MonoBehaviour
     [ContextMenu("Exit")]
     public void ClickExitButton()
     {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        
+#endif
         Application.Quit();
+        Debug.Log("1");
     }
 }

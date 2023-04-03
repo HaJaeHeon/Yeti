@@ -943,7 +943,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349401981}
   m_LocalRotation: {x: 0, y: -0.17442164, z: 0, w: 0.98467106}
-  m_LocalPosition: {x: 0, y: 0.31, z: -2.43}
+  m_LocalPosition: {x: 0, y: -0.9, z: -2.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1807,8 +1807,8 @@ GameObject:
   - component: {fileID: 967039923}
   - component: {fileID: 967039927}
   - component: {fileID: 967039926}
-  - component: {fileID: 967039925}
   - component: {fileID: 967039924}
+  - component: {fileID: 967039928}
   m_Layer: 5
   m_Name: HTPPanel
   m_TagString: Untagged
@@ -1860,21 +1860,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!111 &967039925
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 967039922}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 96e7e7cc55f45f745a7bbdcf169040b2, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &967039926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1913,6 +1898,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 967039922}
   m_CullTransparentMesh: 1
+--- !u!111 &967039928
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967039922}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 96e7e7cc55f45f745a7bbdcf169040b2, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 96e7e7cc55f45f745a7bbdcf169040b2, type: 2}
+  m_WrapMode: 2
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &999446443
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+//using UnityEngine.SceneManagement;
 
 public class ImageChange : MonoBehaviour
 {
@@ -16,18 +16,6 @@ public class ImageChange : MonoBehaviour
     private void Start()
     {
         StartCoroutine(ImageSwap());
-        yt.transform.position = new Vector2(barTr.position.x - (barTr.rect.width / 2  * 7) + 350f, yt.transform.position.y);
-    }
-
-    private void Update()
-    {
-        ytMove();
-    }
-
-    private void ytMove()
-    {
-        yt.transform.position = new Vector2(barTr.transform.position.x - (barTr.rect.width / 2 * 7)
-                                            + (barTr.rect.width / 2 * 7 * barImage.fillAmount) + 350f, yt.transform.position.y);
     }
 
     IEnumerator ImageSwap()

@@ -56,6 +56,5 @@ public class StartGM : MonoBehaviour
         
 #endif
         Application.Quit();
-        Debug.Log("1");
     }
 }

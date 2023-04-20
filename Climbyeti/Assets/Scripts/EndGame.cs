@@ -8,13 +8,13 @@ public class EndGame : MonoBehaviour
 {
     public GameObject walls;
     public GameObject finishCanvas;
-    public Camera mc;
-    public Camera endCam;
+    public GameObject mc;
+    public GameObject endCam;
 
     private void Start()
     {
-        mc.gameObject.SetActive(true);
-        endCam.gameObject.SetActive(false);
+        mc.SetActive(true);
+        endCam.SetActive(false);
         finishCanvas.SetActive(false);
     }
 
@@ -23,7 +23,6 @@ public class EndGame : MonoBehaviour
         if (collision.collider.CompareTag("MainCamera"))
         {
             Ending();
-            Debug.Log("11");
         }
     }
 
@@ -37,8 +36,8 @@ public class EndGame : MonoBehaviour
     IEnumerator EndCanvas()
     {
         finishCanvas.SetActive(true);
-        mc.transform.gameObject.SetActive(false);
-        endCam.transform.gameObject.SetActive(true);
+        mc.SetActive(false);
+        endCam.SetActive(true);
         
         yield return new WaitForSeconds(10f);
         SceneLoader.LoadScene("StartScene");

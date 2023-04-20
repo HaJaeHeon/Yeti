@@ -9,12 +9,13 @@ public class ButtonControl : MonoBehaviour
 {
     private InputData _inputData;
     public GameObject htpPannel;
-    public bool menuOpend;
-
+    public GameObject menuPannel;
+    public bool coroutineRun = false;
+    public Transform playerTr;
     private void Start()
     {
         _inputData = GetComponent<InputData>();
-        menuOpend = true;
+        coroutineRun = false;
     }
 
     private void Update()
@@ -23,11 +24,15 @@ public class ButtonControl : MonoBehaviour
         //    Invoke("OpenMenu", 0.5f);
 
         _inputData._leftController.TryGetFeatureValue(CommonUsages.menuButton, out bool menuButton);
-        if(menuButton && menuOpend)
-            Invoke("OpenMenu", 0.5f);
-
-        Debug.Log(menuButton);
-        Debug.Log(menuOpend);
+        if (menuButton)
+        {
+            StartCoroutine(MenuCoroutine());
+        }
+        else if (!menuButton)
+        {
+            StopCoroutine(MenuCoroutine());
+            coroutineRun = false;
+        }
 
         //if (_inputData._rightController.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue))
         //    Debug.Log(triggerValue);
@@ -41,18 +46,48 @@ public class ButtonControl : MonoBehaviour
         //    Debug.Log(menuButton);
     }
 
+    [ContextMenu("HTP_Close")]
     public void CloseHTP()
     {
         htpPannel.SetActive(false);
     }
 
-    public void OpenMenu()
+    IEnumerator MenuCoroutine()
     {
-        if(menuOpend)
-            menuOpend = false;
-        else if (!menuOpend)
-            menuOpend = true;
-        Debug.Log("11");
+        if (!coroutineRun)
+        {
+            coroutineRun = true;
+            
+            if(menuPannel.activeSelf)
+                menuPannel.SetActive(false);
+            else if (!menuPannel.activeSelf)
+            {
+                menuPannel.transform.position = playerTr.position +
+                                                playerTr.forward * 10f;
+                menuPannel.transform.rotation = playerTr.rotation;
+                menuPannel.SetActive(true);
+            }
+        }
+
+        yield return null;
+    }
+
+    [ContextMenu("OpenMenu")]
+    private void OpenMenu()
+    {
+        if(menuPannel.activeSelf)
+            menuPannel.SetActive(false);
+        else
+            menuPannel.SetActive(true);
+    }
+
+    [ContextMenu("HTPOpen")]
+    public void HTPButton()
+    {
+        htpPannel.transform.position = playerTr.position +
+                                       playerTr.forward * 9.9f;
+        htpPannel.transform.rotation = playerTr.rotation;
+        htpPannel.SetActive(true);
     }
     
 

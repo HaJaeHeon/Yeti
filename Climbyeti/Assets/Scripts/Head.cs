@@ -5,7 +5,8 @@ using UnityEngine;
 public class Head : MonoBehaviour
 {
     [SerializeField] private Transform rootObject, followObject;
-    [SerializeField] private Vector3 positionOffset, rotationOffset, headBodyOffset;
+    [SerializeField] private Vector3 positionOffset, rotationOffset;
+    public Vector3 headBodyOffset;
 
     //private void Start()
     //{

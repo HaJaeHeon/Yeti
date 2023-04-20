@@ -33,7 +33,6 @@ public class PhysicsHand : MonoBehaviour
     {
         PIDMovement();
         PIDRotation();
-        Physics.IgnoreLayerCollision(7,8);
         if(_isColliding) HookesLaw();
     }
 

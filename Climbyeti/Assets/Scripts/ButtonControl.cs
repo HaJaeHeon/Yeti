@@ -12,6 +12,7 @@ public class ButtonControl : MonoBehaviour
     public GameObject menuPannel;
     public bool coroutineRun = false;
     public Transform playerTr;
+    public bool isMenuOpen;
     private void Start()
     {
         _inputData = GetComponent<InputData>();
@@ -44,6 +45,11 @@ public class ButtonControl : MonoBehaviour
         //    Debug.Log(gripValue);
         //if (_inputData._leftController.TryGetFeatureValue(CommonUsages.menuButton, out bool menuButton))
         //    Debug.Log(menuButton);
+
+        if (menuPannel.activeSelf == true)
+            Time.timeScale = 0;
+        else
+            Time.timeScale = 1;
     }
 
     [ContextMenu("HTP_Close")]
@@ -84,10 +90,19 @@ public class ButtonControl : MonoBehaviour
     [ContextMenu("HTPOpen")]
     public void HTPButton()
     {
+        menuPannel.SetActive(false);
         htpPannel.transform.position = playerTr.position +
                                        playerTr.forward * 9.9f;
         htpPannel.transform.rotation = playerTr.rotation;
+        Time.timeScale = 1;
         htpPannel.SetActive(true);
+    }
+
+    public void MainMenuButton()
+    {
+        Time.timeScale = 1;
+        Debug.Log(Time.timeScale);
+        SceneLoader.LoadScene("StartScene");
     }
     
 

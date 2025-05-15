@@ -10,30 +10,30 @@ public class PhysicsHand : MonoBehaviour
     [SerializeField] private float rotDamping = 0.9f;
     [SerializeField] Rigidbody playerRigidbody;
     [SerializeField] private Transform target;
-    private Rigidbody _rigidbody;
+    private Rigidbody rigidbody;
 
     [Space] 
     [Header("Springs")] 
     [SerializeField] private float climbForce = 1000f;
     [SerializeField] private float climbDrag = 500f;
 
-    private Vector3 _previousPosition;
-    private bool _isColliding;
+    private Vector3 previousPosition;
+    private bool isColliding;
     
     private void Start()
     {
         transform.position = target.position;
         transform.rotation = target.rotation;
-        _rigidbody = GetComponent<Rigidbody>();
-        _rigidbody.maxAngularVelocity = float.PositiveInfinity;
-        _previousPosition = transform.position;
+        rigidbody = GetComponent<Rigidbody>();
+        rigidbody.maxAngularVelocity = float.PositiveInfinity;
+        previousPosition = transform.position;
     }
 
     private void FixedUpdate()
     {
         PIDMovement();
         PIDRotation();
-        if(_isColliding) HookesLaw();
+        if(isColliding) HookesLaw();
     }
 
     void PIDMovement()
@@ -44,8 +44,8 @@ public class PhysicsHand : MonoBehaviour
         float ksg = kp * g;
         float kdg = (kd + kp * Time.fixedDeltaTime) * g;
         Vector3 force = (target.position - transform.position) * ksg +
-                        (playerRigidbody.velocity - _rigidbody.velocity) * kdg;
-        _rigidbody.AddForce(force, ForceMode.Acceleration);
+                        (playerRigidbody.velocity - rigidbody.velocity) * kdg;
+        rigidbody.AddForce(force, ForceMode.Acceleration);
     }
 
     void PIDRotation()
@@ -66,8 +66,8 @@ public class PhysicsHand : MonoBehaviour
         q.ToAngleAxis(out float angle, out Vector3 axis);
         axis.Normalize();
         axis *= Mathf.Deg2Rad;
-        Vector3 torque = ksg * axis * angle + -_rigidbody.angularVelocity * kdg;
-        _rigidbody.AddTorque(torque, ForceMode.Acceleration);
+        Vector3 torque = ksg * axis * angle + -rigidbody.angularVelocity * kdg;
+        rigidbody.AddTorque(torque, ForceMode.Acceleration);
     }
 
     void HookesLaw()
@@ -82,21 +82,21 @@ public class PhysicsHand : MonoBehaviour
 
     float GetDrag()
     {
-        Vector3 handVelocity = (target.localPosition - _previousPosition / Time.fixedDeltaTime);
+        Vector3 handVelocity = (target.localPosition - previousPosition / Time.fixedDeltaTime);
         float drag = 1 / handVelocity.magnitude + 0.01f;
         drag = drag > 1 ? 1 : drag;
         drag = drag < 0.03f ? 0.03f : drag;
-        _previousPosition = transform.position;
+        previousPosition = transform.position;
         return drag;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        _isColliding = true;
+        isColliding = true;
     }
 
     private void OnCollisionExit(Collision other)
     {
-        _isColliding = false;
+        isColliding = false;
     }
 }

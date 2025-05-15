@@ -32,11 +32,9 @@ public class InputData : MonoBehaviour
     private void InitializeInputDevice(InputDeviceCharacteristics inputCharacteristics, ref InputDevice inputDevice)
     {
         List<InputDevice> devices = new List<InputDevice>();
-        //Call InputDevices to see if it can find any devices with the characteristics we're looking for
+
         InputDevices.GetDevicesWithCharacteristics(inputCharacteristics, devices);
         
-        //Our hands might noit be active and so they will not be generated from the search.
-        //We check if any devices are found here to avoid errors.
         if (devices.Count > 0)
             inputDevice = devices[0];
     }

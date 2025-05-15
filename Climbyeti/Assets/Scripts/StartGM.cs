@@ -8,11 +8,11 @@ using UnityEngine.UI;
 public enum ActivePanel
 {
     TitlePanel = 0,
-    HTPanel = 1
+    TutorialPanel = 1
 }
 public class StartGM : MonoBehaviour
 {
-    public ActivePanel pan = ActivePanel.TitlePanel;
+    public ActivePanel activePanel = ActivePanel.TitlePanel;
     public GameObject[] panels;
     
     private void Start()
@@ -20,14 +20,14 @@ public class StartGM : MonoBehaviour
      ChangePanel(ActivePanel.TitlePanel );   
     }
 
-    [ContextMenu("HTP")]
-    public void ClickHtpButton()
+    [ContextMenu("Tutorial")]
+    public void ClickTutorialButton()
     {
-        ChangePanel(ActivePanel.HTPanel);
+        ChangePanel(ActivePanel.TutorialPanel);
     }
 
-    [ContextMenu("HTP_Close")]
-    public void ClickHTP_CloseButton()
+    [ContextMenu("TutorialClose")]
+    public void ClickTutorialCloseButton()
     {
         ChangePanel(ActivePanel.TitlePanel);
     }
@@ -44,7 +44,6 @@ public class StartGM : MonoBehaviour
     [ContextMenu("Start")]
     public void ClickStartButton()
     {
-        //SceneManager.LoadScene("PlayScene");
         SceneLoader.LoadScene("PlayScene");
     }
 
